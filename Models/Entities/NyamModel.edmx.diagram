@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="11ecce340ba746268558b6a6da3891dc" Name="Diagram1">
+        <EntityTypeShape EntityType="NyamNyamModel.Category" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NyamNyamModel.Client" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NyamNyamModel.CookingStage" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NyamNyamModel.Dish" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NyamNyamModel.Ingredient" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NyamNyamModel.IngredientOfStage" Width="1.5" PointX="7.5" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="NyamNyamModel.Order" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="NyamNyamModel.OrderedDish" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NyamNyamModel.Unit" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <AssociationConnector Association="NyamNyamModel.FK_Dish_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="NyamNyamModel.FK_Order_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="NyamNyamModel.FK_CookingStage_Dish1" ManuallyRouted="false" />
+        <AssociationConnector Association="NyamNyamModel.FK_IngredientOfStage_CookingStage1" ManuallyRouted="false" />
+        <AssociationConnector Association="NyamNyamModel.FK_OrderedDish_Dish" ManuallyRouted="false" />
+        <AssociationConnector Association="NyamNyamModel.FK_Ingredient_Unit" ManuallyRouted="false" />
+        <AssociationConnector Association="NyamNyamModel.FK_IngredientOfStage_Ingredient" ManuallyRouted="false" />
+        <AssociationConnector Association="NyamNyamModel.FK_OrderedDish_Order" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -45,10 +45,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -155,12 +162,60 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\DishesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entities\Category.cs">
+      <DependentUpon>NyamModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Client.cs">
+      <DependentUpon>NyamModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\CookingStage.cs">
+      <DependentUpon>NyamModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Dish.cs">
+      <DependentUpon>NyamModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Ingredient.cs">
+      <DependentUpon>NyamModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\IngredientOfStage.cs">
+      <DependentUpon>NyamModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\NyamModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NyamModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\NyamModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NyamModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\NyamModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NyamModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Order.cs">
+      <DependentUpon>NyamModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\OrderedDish.cs">
+      <DependentUpon>NyamModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Unit.cs">
+      <DependentUpon>NyamModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\ImageResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ImageResources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -168,9 +223,35 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Dishes.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Models\Entities\NyamModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>NyamModel.Context.cs</LastGenOutput>
+      <DependentUpon>NyamModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Entities\NyamModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NyamModel.edmx</DependentUpon>
+      <LastGenOutput>NyamModel.cs</LastGenOutput>
+    </Content>
+    <Resource Include="Resources\1.jpg" />
+    <Resource Include="Resources\2.jpeg" />
+    <Resource Include="Resources\3.jpg" />
+    <Resource Include="Resources\4.jpeg" />
+    <Resource Include="Resources\5.jpeg" />
+    <Resource Include="Resources\6.jpeg" />
+    <Resource Include="Resources\7.jpeg" />
+    <Resource Include="Resources\8.jpeg" />
+    <Resource Include="Resources\9.jpeg" />
+    <Resource Include="Resources\10.jpeg" />
+    <Resource Include="Resources\11.jpeg" />
+    <Resource Include="Resources\12.jpeg" />
+    <Resource Include="Resources\13.jpeg" />
+    <Resource Include="Resources\14.jpeg" />
+    <Resource Include="Resources\15.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -192,6 +273,13 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <EntityDeploy Include="Models\Entities\NyamModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NyamModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Entities\NyamModel.edmx.diagram">
+      <DependentUpon>NyamModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -212,10 +300,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Dishes\Details.cshtml" />
+    <Content Include="Views\Dishes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -245,6 +334,15 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\ImageResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ImageResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

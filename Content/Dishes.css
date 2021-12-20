@@ -1,0 +1,12 @@
+﻿.dish-image {
+    object-fit: cover;
+}
+
+.dish-image--200px {
+    height: 200px;
+    width: 200px;
+}
+
+.dish-image--round {
+    border-radius: 10px;
+}
