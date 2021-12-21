@@ -32,6 +32,19 @@ a:hover {
     color: #fdb249;
 }
 
+a:visited {
+    color: #fdb249;
+}
+
+a:hover {
+    color: #d5c847;
+}
+
+a:active {
+    color: #fdb249;
+};
+}
+
 a:active {
     color: #fdb249;
 }

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using NyamNyamWebAPI.Models.Entities;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using NyamNyamWebAPI.Models.Entities;
 
 namespace NyamNyamWebAPI.Controllers
 {
@@ -52,13 +48,14 @@ namespace NyamNyamWebAPI.Controllers
         {
             if (ModelState.IsValid)
             {
+                order.CreatedDT = System.DateTime.Now;
                 db.Order.Add(order);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.ClientId = new SelectList(db.Client, "Id", "Name", order.ClientId);
-            return View(order);
+            return RedirectToAction("Details", "Orders", new { id = order.Id });
         }
 
         protected override void Dispose(bool disposing)
