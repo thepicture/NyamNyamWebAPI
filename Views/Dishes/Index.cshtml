@@ -11,12 +11,17 @@
       asp-action="Index"
       method="get">
     <p>
-        Dish Name: <input type="text"
-                          name="NameSearchText" />
-        <br />
+        Dish Name: @Html.TextBox("NameSearchText")
         Dish Category: @Html.DropDownList("category", "All");
-        <br />
-        Show only dishes with price from <input type="number" name="PriceFromText" value="1" min="1" />$ to <input type="number" name="PriceToText" value="100" max="100" />$
+        Show only dishes with price from <input type="number"
+                                                name="PriceFromText"
+                                                step="any"
+                                                value="@(Request.QueryString.Get("PriceFromText") == null ? ViewBag.MinPrice : Request.QueryString.Get("PriceFromText"))"
+                                                min="@ViewBag.MinPrice" />$ to <input type="number" 
+                                                                                      step="any"
+                                                                                      name="PriceToText"
+                                                                                      value="@(Request.QueryString.Get("PriceToText") == null ? ViewBag.MaxPrice : Request.QueryString.Get("PriceToText"))"
+                                                                                      max="@ViewBag.MaxPrice" />$
         <input type="submit"
                value="Filter" />
     </p>
@@ -73,7 +78,7 @@
                 @Html.DisplayFor(modelItem => item.Category.Name)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new {id = item.Id })
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
             </td>
         </tr>
     }

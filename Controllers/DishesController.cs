@@ -1,5 +1,6 @@
 ﻿using NyamNyamWebAPI.Models;
 using NyamNyamWebAPI.Models.Entities;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -19,7 +20,9 @@ namespace NyamNyamWebAPI.Controllers
             var dishes = from d in db.Dish
                          select d;
             var categoryList = dishes.Select(d => d.Category.Name).Distinct();
-            ViewBag.category = new SelectList(categoryList);
+            ViewBag.Category = new SelectList(categoryList);
+            ViewBag.MinPrice = dishes.Min(d => d.FinalPriceInCents * 1.0 / 100);
+            ViewBag.MaxPrice = dishes.Max(d => d.FinalPriceInCents * 1.0 / 100);
 
             if (!string.IsNullOrWhiteSpace(nameSearchText))
             {
@@ -40,7 +43,6 @@ namespace NyamNyamWebAPI.Controllers
                                && d.FinalPriceInCents < priceTo * 100
                          select d;
             }
-
             var dishCategoryVM = new DishCategoryViewModel
             {
                 Categories = new SelectList(db.Category.ToList().Select(c => c.Name)),
