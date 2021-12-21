@@ -11,7 +11,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            Dish name
         </dt>
 
         <dd>
@@ -19,7 +19,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.BaseServingsQuantity)
+            Base servings
         </dt>
 
         <dd>
@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Image)
+            Image
         </dt>
 
         <dd>
@@ -36,15 +36,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.RecipeLink)
+            Internet recipe link
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.RecipeLink)
+            <a href="@Html.DisplayFor(model => model.RecipeLink)">@Html.DisplayFor(model => model.RecipeLink)</a>
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            Dish description
         </dt>
 
         <dd>
@@ -52,15 +52,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FinalPriceInCents)
+            Price
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FinalPriceInCents)
+            @((Model.FinalPriceInCents * 1.0 / 100).ToString("F2"))$
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Category.Name)
+            Dish category
         </dt>
 
         <dd>
@@ -70,6 +70,5 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", null, null, new { href = Request.UrlReferrer })
 </p>

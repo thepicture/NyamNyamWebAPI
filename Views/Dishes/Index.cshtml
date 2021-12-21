@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NyamNyamWebAPI.Models.Entities.Dish>
+﻿@model NyamNyamWebAPI.Models.DishCategoryViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -6,33 +6,48 @@
 
 <h2>Index</h2>
 
+<p>Search dishes</p>
+<form asp-controller="Dishes"
+      asp-action="Index"
+      method="get">
+    <p>
+        Dish Name: <input type="text"
+                          name="NameSearchText" />
+        <br />
+        Dish Category: @Html.DropDownList("category", "All");
+        <br />
+        Show only dishes with price from <input type="number" name="PriceFromText" value="1" min="1" />$ to <input type="number" name="PriceToText" value="100" max="100" />$
+        <input type="submit"
+               value="Filter" />
+    </p>
+</form>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            Dish name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BaseServingsQuantity)
+            Servings
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Image)
+            Dish image
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RecipeLink)
+            Internet recipe link
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            Description
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FinalPriceInCents)
+            Price
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Category.Name)
+            Category
         </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Dishes)
     {
         <tr>
             <td>
@@ -46,19 +61,19 @@
                      class="dish-image dish-image--200px dish-image--round" />
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RecipeLink)
+                <a href="@Html.DisplayFor(modelItem => item.RecipeLink)">@Html.DisplayFor(modelItem => item.RecipeLink)</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FinalPriceInCents)
+                @((item.FinalPriceInCents * 1.0 / 100).ToString("F2"))$
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Category.Name)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id = item.Id })
+                @Html.ActionLink("Details", "Details", new {id = item.Id })
             </td>
         </tr>
     }

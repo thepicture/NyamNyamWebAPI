@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using NyamNyamWebAPI.Models;
+using NyamNyamWebAPI.Models.Entities;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using NyamNyamWebAPI.Models.Entities;
 
 namespace NyamNyamWebAPI.Controllers
 {
@@ -15,10 +11,43 @@ namespace NyamNyamWebAPI.Controllers
         private NyamNyamEntities db = new NyamNyamEntities();
 
         // GET: Dishes
-        public ActionResult Index()
+        public ActionResult Index(string nameSearchText,
+                                  string category,
+                                  string priceFromText,
+                                  string priceToText)
         {
-            var dish = db.Dish.Include(d => d.Category);
-            return View(dish.ToList());
+            var dishes = from d in db.Dish
+                         select d;
+            var categoryList = dishes.Select(d => d.Category.Name).Distinct();
+            ViewBag.category = new SelectList(categoryList);
+
+            if (!string.IsNullOrWhiteSpace(nameSearchText))
+            {
+                dishes = dishes.Where(d => d.Name.Contains(nameSearchText));
+            }
+
+            if (!string.IsNullOrWhiteSpace(category))
+            {
+                dishes = dishes.Where(d => d.Category.Name == category);
+            }
+
+            if (double.TryParse(priceFromText, out var priceFrom)
+                && double.TryParse(priceToText, out var priceTo)
+                && priceFrom <= priceTo)
+            {
+                dishes = from d in dishes
+                         where d.FinalPriceInCents > priceFrom * 100
+                               && d.FinalPriceInCents < priceTo * 100
+                         select d;
+            }
+
+            var dishCategoryVM = new DishCategoryViewModel
+            {
+                Categories = new SelectList(db.Category.ToList().Select(c => c.Name)),
+                Dishes = dishes.ToList()
+            };
+
+            return View(dishCategoryVM);
         }
 
         // GET: Dishes/Details/5
@@ -34,90 +63,6 @@ namespace NyamNyamWebAPI.Controllers
                 return HttpNotFound();
             }
             return View(dish);
-        }
-
-        // GET: Dishes/Create
-        public ActionResult Create()
-        {
-            ViewBag.CategoryId = new SelectList(db.Category, "Id", "Name");
-            return View();
-        }
-
-        // POST: Dishes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,BaseServingsQuantity,CategoryId,Image,RecipeLink,Description,FinalPriceInCents")] Dish dish)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Dish.Add(dish);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.CategoryId = new SelectList(db.Category, "Id", "Name", dish.CategoryId);
-            return View(dish);
-        }
-
-        // GET: Dishes/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Dish dish = db.Dish.Find(id);
-            if (dish == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.CategoryId = new SelectList(db.Category, "Id", "Name", dish.CategoryId);
-            return View(dish);
-        }
-
-        // POST: Dishes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,BaseServingsQuantity,CategoryId,Image,RecipeLink,Description,FinalPriceInCents")] Dish dish)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(dish).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.CategoryId = new SelectList(db.Category, "Id", "Name", dish.CategoryId);
-            return View(dish);
-        }
-
-        // GET: Dishes/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Dish dish = db.Dish.Find(id);
-            if (dish == null)
-            {
-                return HttpNotFound();
-            }
-            return View(dish);
-        }
-
-        // POST: Dishes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Dish dish = db.Dish.Find(id);
-            db.Dish.Remove(dish);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
