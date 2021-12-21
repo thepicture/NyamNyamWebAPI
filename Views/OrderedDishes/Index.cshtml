@@ -1,0 +1,57 @@
+﻿@model IEnumerable<NyamNyamWebAPI.Models.Entities.OrderedDish>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ServingsNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartCookingDT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndCookingDT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dish.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Order.AppointedAddress)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServingsNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartCookingDT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndCookingDT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dish.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Order.AppointedAddress)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

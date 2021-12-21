@@ -11,7 +11,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.CreatedDT)
+            Creation time
         </dt>
 
         <dd>
@@ -19,7 +19,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AppointedDT)
+            Appointment time
         </dt>
 
         <dd>
@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AppointedAddress)
+            Appointed address
         </dt>
 
         <dd>
@@ -35,7 +35,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Client.Name)
+            Client name
         </dt>
 
         <dd>
@@ -44,7 +44,57 @@
 
     </dl>
 </div>
+
+<h2>Ordered dishes</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Servings number
+        </th>
+        <th>
+            Date and time of start cooking
+        </th>
+        <th>
+            Date and time of end cooking
+        </th>
+        <th>
+            Dish name
+        </th>
+        <th>
+            Appointed address
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.OrderedDish)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServingsNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartCookingDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndCookingDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dish.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.AppointedAddress)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "OrderedDishes", new { OrderId = Model.Id, DishId = item.DishId }, null) |
+                @Html.ActionLink("Delete", "Delete", "OrderedDishes", new { OrderId = Model.Id, DishId = item.DishId }, null)
+            </td>
+        </tr>
+    }
+
+</table>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Add ordered dish", "Create", "OrderedDishes", new { OrderId = Model.Id }, null) |
     @Html.ActionLink("Back to List", "Index")
 </p>
