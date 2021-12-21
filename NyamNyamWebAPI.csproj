@@ -164,6 +164,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\DishesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -238,6 +239,9 @@
       <DependentUpon>NyamModel.edmx</DependentUpon>
       <LastGenOutput>NyamModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
     <Resource Include="Resources\1.jpg" />
     <Resource Include="Resources\2.jpeg" />
     <Resource Include="Resources\3.jpg" />

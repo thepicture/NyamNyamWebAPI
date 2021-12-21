@@ -1,0 +1,50 @@
+﻿@model IEnumerable<NyamNyamWebAPI.Models.Entities.Order>
+
+@{
+    ViewBag.Title = "Orders";
+}
+
+<h2>Orders</h2>
+
+<p>
+    @Html.ActionLink("Formate a new order", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AppointedDT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AppointedAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Client.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppointedDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppointedAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
