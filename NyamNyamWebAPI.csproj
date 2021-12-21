@@ -240,6 +240,7 @@
       <DependentUpon>NyamModel.edmx</DependentUpon>
       <LastGenOutput>NyamModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\navbar-scroll-visibility-changer.js" />
     <Content Include="Views\Orders\Create.cshtml" />
     <Content Include="Views\Orders\Details.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
@@ -307,7 +308,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Dishes\Details.cshtml" />
