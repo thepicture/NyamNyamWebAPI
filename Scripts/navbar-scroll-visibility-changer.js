@@ -4,8 +4,8 @@ const navigationBar = document.querySelector("body > div.navbar.navbar-fixed-top
 
 document.addEventListener("mousewheel", function (e) {
     if (e.wheelDelta < 0) {
-        navigationBar.style.opacity = "0";
+        navigationBar.style.visibility = "hidden";
     } else {
-        navigationBar.style.opacity = "1";
+        navigationBar.style.visibility = "visible";
     }
 });

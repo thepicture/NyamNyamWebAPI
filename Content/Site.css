@@ -20,30 +20,6 @@ textarea {
         background-color: #fdb249;
     }
 
-a:link {
-    color: #fdb249;
-}
-
-a:visited {
-    color: #fdb249;
-}
-
-a:hover {
-    color: #fdb249;
-}
-
-a:visited {
-    color: #fdb249;
-}
-
-a:hover {
-    color: #d5c847;
-}
-
-a:active {
-    color: #fdb249;
-};
-}
 
 a:active {
     color: #fdb249;
@@ -51,10 +27,6 @@ a:active {
 
 .shadow {
     box-shadow: rgba(0,0,0,.3) 0px 1px 2px;
-}
-
-.navbar--animated {
-    transition: all ease-in-out 100ms;
 }
 
 .navbar--bg-light  {

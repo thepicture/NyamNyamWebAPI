@@ -44,7 +44,7 @@ namespace NyamNyamWebAPI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedDT,ClientId,AppointedDT,AppointedAddress")] Order order)
+        public ActionResult Create([Bind(Include = "Id,ClientId,AppointedDT,AppointedAddress")] Order order)
         {
             if (ModelState.IsValid)
             {
