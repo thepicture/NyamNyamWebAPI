@@ -165,6 +165,7 @@
     <Compile Include="Controllers\DishesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderApiController.cs" />
+    <Compile Include="Controllers\OrderedDishesApiController.cs" />
     <Compile Include="Controllers\OrderedDishesController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
