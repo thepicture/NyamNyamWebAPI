@@ -1,6 +1,7 @@
 ﻿using NyamNyamWebAPI.Models.Entities;
 using NyamNyamWebAPI.Models.Enums;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace NyamNyamWebAPI.Models.ResponseModels
@@ -13,8 +14,7 @@ namespace NyamNyamWebAPI.Models.ResponseModels
             CustomerFullName = order.Client.Name;
             Dishes = string.Join(", ",
                                  order.OrderedDish.Select(od => od.Dish.Name));
-            AppointmentDate = order.AppointedDT;
-            CreationDate = order.CreatedDT;
+            AppointmentDate = order.AppointedDT.ToString("d MMMM");
             TotalCost = order.OrderedDish
                              .Sum(od =>
                              {
@@ -25,30 +25,31 @@ namespace NyamNyamWebAPI.Models.ResponseModels
                              }) + "$";
             if (order.OrderedDish.All(od => od.EndCookingDT >= DateTime.Now))
             {
-                Status = OrderStatuses.Waiting;
+                Status = FulfillStatuses.Waiting;
             }
             else if (order.OrderedDish.All(od => od.EndCookingDT < DateTime.Now))
             {
-                Status = OrderStatuses.Finished;
+                Status = FulfillStatuses.Finished;
             }
             else
             {
-                Status = OrderStatuses.InProcess;
+                Status = FulfillStatuses.InProcess;
             }
             IsEnoughIngredients = (from o in order.OrderedDish
                                    from cs in o.Dish.CookingStage
                                    from ios in cs.IngredientOfStage
                                    where ios.Ingredient.AvailableCount < cs.IngredientOfStage.Where(s => s.IngredientId == ios.IngredientId).Sum(s => s.Quantity)
                                    select o).Count() == 0;
+            DishesList = order.OrderedDish.ToList().ConvertAll(od => new ResponseDish(od));
         }
 
         public int Id;
         public string CustomerFullName;
         public string Dishes;
-        public DateTime AppointmentDate;
-        public DateTime CreationDate;
+        public string AppointmentDate;
         public string TotalCost;
         public string Status;
         public bool IsEnoughIngredients;
+        public IEnumerable<ResponseDish> DishesList;
     }
 }

@@ -26,13 +26,16 @@ namespace NyamNyamWebAPI.Controllers
                                 .OrderByDescending(o => o.AppointedDT)
                                 .ToList()
                                 .ConvertAll(o => new ResponseOrder(o));
-            return Ok(new { Orders = orders });
+            return Ok(new
+            {
+                Orders = orders
+            });
         }
 
         // GET api/orderapi/5
-        public string Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            return "value";
+            return Ok(db.Order.Find(id));
         }
 
         // POST api/orderapi
