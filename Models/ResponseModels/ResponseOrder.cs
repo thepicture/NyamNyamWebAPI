@@ -1,6 +1,5 @@
 ﻿using NyamNyamWebAPI.Models.Entities;
 using NyamNyamWebAPI.Models.Enums;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,11 +22,11 @@ namespace NyamNyamWebAPI.Models.ResponseModels
                                         * 1.0
                                         / 100;
                              }) + "$";
-            if (order.OrderedDish.All(od => od.EndCookingDT >= DateTime.Now))
+            if (order.OrderedDish.All(od => od.StartCookingDT == null && od.EndCookingDT == null))
             {
                 Status = FulfillStatuses.Waiting;
             }
-            else if (order.OrderedDish.All(od => od.EndCookingDT < DateTime.Now))
+            else if (order.OrderedDish.All(od => od.StartCookingDT != null && od.EndCookingDT != null))
             {
                 Status = FulfillStatuses.Finished;
             }
@@ -38,7 +37,7 @@ namespace NyamNyamWebAPI.Models.ResponseModels
             IsEnoughIngredients = (from o in order.OrderedDish
                                    from cs in o.Dish.CookingStage
                                    from ios in cs.IngredientOfStage
-                                   where ios.Ingredient.AvailableCount < cs.IngredientOfStage.Where(s => s.IngredientId == ios.IngredientId).Sum(s => s.Quantity)
+                                   where ios.Ingredient.AvailableCount < cs.IngredientOfStage.Where(s => s.IngredientId == ios.IngredientId).Sum(s => s.Quantity) * o.ServingsNumber
                                    select o).Count() == 0;
             DishesList = order.OrderedDish.ToList().ConvertAll(od => new ResponseDish(od));
         }
