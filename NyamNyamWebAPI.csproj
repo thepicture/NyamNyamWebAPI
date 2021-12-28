@@ -162,6 +162,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\CookingStagesController.cs" />
     <Compile Include="Controllers\DishesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngredientsApiController.cs" />
@@ -217,6 +218,8 @@
       <DependentUpon>NyamModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Enums\FulfillStatuses.cs" />
+    <Compile Include="Models\ResponseModels\ResponseCookingStage.cs" />
+    <Compile Include="Models\ResponseModels\ResponseCookingStageIngredient.cs" />
     <Compile Include="Models\ResponseModels\ResponseDish.cs" />
     <Compile Include="Models\ResponseModels\ResponseIngredient.cs" />
     <Compile Include="Models\ResponseModels\ResponseIngredientGroup.cs" />
@@ -323,6 +326,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\CookingStages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
