@@ -9,7 +9,6 @@ namespace NyamNyamWebAPI.Models.ResponseModels
         public double CookingTimeInMinutes;
         public ResponseCookingStageIngredient[] Ingredients;
         public string Description;
-        public string Status;
         public int OrderId;
         public int DishId;
 
@@ -29,8 +28,6 @@ namespace NyamNyamWebAPI.Models.ResponseModels
             .Distinct()
             .ToArray();
             Description = stage.ProcessDescription;
-            ResponseDish responseDish = new ResponseDish(dish);
-            Status = responseDish.Status;
             OrderId = dish.OrderId;
             DishId = dish.DishId;
         }

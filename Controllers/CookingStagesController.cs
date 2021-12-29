@@ -32,9 +32,11 @@ namespace NyamNyamWebAPI.Controllers
             }
 
             int sequentialNumber = 1;
-            return Ok(new
+            bool isDishCookingInProgress = orderedDish.StartCookingDT != null && orderedDish.EndCookingDT == null;
+            return base.Ok(new
             {
                 RecipeName = orderedDish.Dish.Name,
+                IsInProgress = isDishCookingInProgress,
                 ServingsCount = orderedDish.Dish.BaseServingsQuantity,
                 CookingStages = orderedDish.Dish.CookingStage.ToList().ConvertAll(cs => new ResponseCookingStage(cs, sequentialNumber++, orderedDish))
             });
